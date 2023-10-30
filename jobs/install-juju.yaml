@@ -1,0 +1,37 @@
+jobs:
+- name: job
+  public: true
+  plan:
+  - task: install juju
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source: {repository: ubuntu}
+      inputs:
+        name: lxd-output
+      run:
+        path: /bin/sh
+        args:
+          - |
+            source ./lxd-output/vars
+            echo connecting to LXD container $UUID
+            echo installing juju ((juju-version))
+            echo Finished
+  - task: bootstrap-controller
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source: {repository: ubuntu}
+      inputs:
+        name: lxd-output
+      run:
+        path: /bin/sh
+        args:
+          - |
+            source ./lxd-output/vars
+            echo connecting to LXD container $UUID
+            echo bootstrapping controller ((juju maas controller))
+            echo Finished
+
