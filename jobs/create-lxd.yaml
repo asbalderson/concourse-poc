@@ -9,7 +9,7 @@ jobs:
         type: registry-image
         source: {repository: ubuntu}
       outputs:
-        name: lxd-output
+        - name: lxd-output
       run:
         path: sh
         args:
