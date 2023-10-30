@@ -1,5 +1,5 @@
 jobs:
-- name: job
+- name: create-lxd
   public: true
   plan:
   - task: create-lxd
@@ -11,12 +11,12 @@ jobs:
       outputs:
         name: lxd-output
       run:
-        path: /bin/sh
+        path: sh
         args:
-          - |
-            UUID=$(uuidgen)
-            echo Creating LXD for ((ubuntu-series))
-            echo LXD at $UUID
-            echo export UUID=$UUID >> ./lxd-output/vars
-            echo Finished
+        - |
+          UUID=$(uuidgen)
+          echo Creating LXD for ((ubuntu-series))
+          echo LXD at $UUID
+          echo export UUID=$UUID >> ./lxd-output/vars
+          echo Finished
 

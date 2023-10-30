@@ -1,5 +1,5 @@
 jobs:
-- name: job
+- name: install-juju
   public: true
   plan:
   - task: install juju
@@ -11,13 +11,13 @@ jobs:
       inputs:
         name: lxd-output
       run:
-        path: /bin/sh
+        path: sh
         args:
-          - |
-            source ./lxd-output/vars
-            echo connecting to LXD container $UUID
-            echo installing juju ((juju-version))
-            echo Finished
+        - |
+          source ./lxd-output/vars
+          echo connecting to LXD container $UUID
+          echo installing juju ((juju-version))
+          echo Finished
   - task: bootstrap-controller
     config:
       platform: linux
@@ -27,11 +27,11 @@ jobs:
       inputs:
         name: lxd-output
       run:
-        path: /bin/sh
+        path: sh
         args:
-          - |
-            source ./lxd-output/vars
-            echo connecting to LXD container $UUID
-            echo bootstrapping controller ((juju maas controller))
-            echo Finished
+        - |
+          source ./lxd-output/vars
+          echo connecting to LXD container $UUID
+          echo bootstrapping controller ((juju maas controller))
+          echo Finished
 
