@@ -11,7 +11,6 @@ outputs:
 run:
   path: bash
   args:
-  - set -uex
   - UUID=$(uuidgen)
   - echo Creating LXD for $ubuntu-series
   - echo LXD at $UUID
