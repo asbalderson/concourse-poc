@@ -11,13 +11,12 @@ outputs:
 run:
   path: /bin/bash
   args:
-  - |
-    set -uex
-    UUID=$(uuidgen)
-    echo Creating LXD for $ubuntu-series
-    echo LXD at $UUID
-    pwd
-    ls
-    touch ./lxd-output/vars
-    echo export UUID=$UUID >> ./lxd-output/vars
-    echo Finished
+  - set -uex
+  - UUID=$(uuidgen)
+  - echo Creating LXD for $ubuntu-series
+  - echo LXD at $UUID
+  - pwd
+  - ls
+  - touch ./lxd-output/vars
+  - echo export UUID=$UUID >> ./lxd-output/vars
+  - echo Finished
