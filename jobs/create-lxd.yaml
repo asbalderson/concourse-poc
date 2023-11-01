@@ -9,7 +9,7 @@ outputs:
 - name: lxd-output
 
 run:
-  path: sh
+  path: /bin/bash
   args:
   - |
     set -uex
