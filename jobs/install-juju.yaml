@@ -1,13 +1,16 @@
 ---
 platform: linux
+
 image_resource:
   type: registry-image
   source: {repository: ubuntu}
+
 inputs:
   - name: lxd-output
 run:
   path: sh
   args:
+  - -exc
   - |
     source ./lxd-output/vars
     echo connecting to LXD container $UUID

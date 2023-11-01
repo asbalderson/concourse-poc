@@ -5,9 +5,6 @@ image_resource:
   type: registry-image
   source: {repository: ubuntu}
 
-outputs:
-- name: lxd-output
-
 run:
   path: sh
   args:
@@ -21,3 +18,7 @@ run:
     touch ./lxd-output/vars
     echo export UUID=$UUID >> ./lxd-output/vars
     echo Finished
+
+outputs:
+- name: lxd-output
+
