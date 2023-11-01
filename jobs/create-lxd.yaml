@@ -9,7 +9,7 @@ outputs:
 - name: lxd-output
 
 run:
-  path: /bin/bash
+  path: bash
   args:
   - set -uex
   - UUID=$(uuidgen)
