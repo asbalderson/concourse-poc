@@ -12,7 +12,7 @@ run:
   args:
   - -exc
   - |
-    source ./lxd-output/vars
+    . ./lxd-output/vars
     echo connecting to LXD container $UUID
     echo installing juju $juju-version
     echo Finished
