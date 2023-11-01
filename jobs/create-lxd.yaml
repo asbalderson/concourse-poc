@@ -9,13 +9,15 @@ outputs:
 - name: lxd-output
 
 run:
-  path: bash
+  path: sh
   args:
-  - UUID=$(uuidgen)
-  - echo Creating LXD for $ubuntu-series
-  - echo LXD at $UUID
-  - pwd
-  - ls
-  - touch ./lxd-output/vars
-  - echo export UUID=$UUID >> ./lxd-output/vars
-  - echo Finished
+  - -exc
+  - |
+    UUID=$(uuidgen)
+    echo Creating LXD for $ubuntu-series
+    echo LXD at $UUID
+    pwd
+    ls
+    touch ./lxd-output/vars
+    echo export UUID=$UUID >> ./lxd-output/vars
+    echo Finished
