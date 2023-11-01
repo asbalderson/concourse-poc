@@ -12,5 +12,5 @@ run:
     - |
       . ./lxd-output/vars
       echo connecting to LXD container $UUID
-      echo bootstrapping controller $juju-maas-controller
+      echo bootstrapping controller $juju_maas_controller
       echo Finished
