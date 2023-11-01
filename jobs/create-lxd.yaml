@@ -13,7 +13,7 @@ run:
   args:
   - -exc
   - |
-    UUID=$(uuidgen)
+    UUID=a8fed72f-049c-4990-912e-4b33b27d2f26
     echo Creating LXD for $ubuntu-series
     echo LXD at $UUID
     pwd
