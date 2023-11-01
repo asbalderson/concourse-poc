@@ -1,0 +1,15 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source: {repository: ubuntu}
+inputs:
+  - name: lxd-output
+run:
+  path: sh
+  args:
+    - |
+      source ./lxd-output/vars
+      echo connecting to LXD container $UUID
+      echo bootstrapping controller ((juju maas controller))
+      echo Finished

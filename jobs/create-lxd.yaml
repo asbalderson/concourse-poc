@@ -1,22 +1,20 @@
-jobs:
-- name: create-lxd
-  public: true
-  plan:
-  - task: create-lxd
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: {repository: ubuntu}
-      outputs:
-        - name: lxd-output
-      run:
-        path: sh
-        args:
-        - |
-          UUID=$(uuidgen)
-          echo Creating LXD for ((ubuntu-series))
-          echo LXD at $UUID
-          echo export UUID=$UUID >> ./lxd-output/vars
-          echo Finished
+---
+platform: linux
 
+image_resource:
+  type: registry-image
+  source: {repository: ubuntu}
+
+outputs:
+- name: lxd-output
+
+run:
+  path: sh
+  args:
+  - |
+    UUID=$(uuidgen)
+    echo Creating LXD for ((ubuntu-series))
+    echo LXD at $UUID
+    touch ./lxd-output/vars
+    echo export UUID=$UUID >> ./lxd-output/vars
+    echo Finished
