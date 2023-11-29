@@ -1,0 +1,76 @@
+resource_types:
+  - name: key-value
+    type: registry-image
+    source:
+      repository: gstack/keyval-resource
+
+resources:
+  - name: file-storage
+    type: key-value
+
+  - name: ci
+    type: git
+    source:
+      uri: https://github.com/asbalderson/concourse-poc.git
+
+jobs:
+  - name: test-and-build
+    public: true
+    plan:
+    - get: ci
+      trigger: true
+    - task: run-tests
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source: {repository: ubuntu}
+        run:
+          path: sh
+          args:
+          - -exec
+          - |
+            echo I am doing stuff to run the tests
+            echo there was a variable foo set to ((foo))
+    - task: build-resource
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source: {repository: ubuntu}
+        run:
+          path: sh
+          args:
+          - -exec
+          - | 
+            echo I am running the tests
+            echo I am now pushing the resource into a storage for future use
+            echo this is a image >> file-storage/image
+        outputs:
+        - name: file-storage
+    - put: file-storage
+      params:
+        directory: file-storage
+  - name: test-resource
+    public: true
+    plan:
+    - in_parallel:
+      - get: file-storage
+        trigger: true
+        passed:
+        - test-and-build
+    - task: test-and-build
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source: {repository: ubuntu}
+        inputs:
+          - name: file-storage
+        run:
+          path: sh
+          args:
+          - -exc
+          - |
+            echo i am testing the image
+            cat file-storage/image
